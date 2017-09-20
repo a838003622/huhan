@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<script src = 'js/hammer.js'></script>
+	<title>Document</title>
+	<style>
+	#box{
+		background-color: red;
+		height: 200px;
+		width: : 200px;
+		/*position: absolute;*/
+	/*	top: 0px;*/
+		z-index: 1;
+		opacity: 1;
+	}
+	a{
+		position: absolute;
+		left: 0px;
+		top: 0px;
+	}
+	</style>
+	<script>
+	window.onload = function()
+	{
+		var oDiv = document.getElementById('box');
+
+	// 	oDiv.onclick = function(){ 
+	// 	alert(1)
+	// }
+		// document.addEventListener('keydown',function(){
+		// 	alert('a')
+		// })
+		// oDiv.addEventListener('touchstart',function(e){
+		// 	oDiv.innerHTML = e.touches.length;
+		// 	console.log('开始触摸')
+		// })
+		// oDiv.addEventListener('touchmove',function(e){
+		// 	oDiv.innerHTML = e.targetTouches.length;
+		// 	console.log('触摸移动')
+		// })
+		// oDiv.addEventListener('touchend',function(e){
+		// 	oDiv.innerHTML = e.changedTouches[0].pageY;
+		// 	console.log('触摸结束')
+		// })
+
+		var haha = new Hammer(oDiv);
+		haha.on('panleft',function(){
+			console.log('swipe right')
+		})
+		haha.on('panright',function(){
+			console.log('swipe left')
+		})
+		haha.on('press',function(){
+			console.log(1)
+		})
+		haha.on('tap',function(){
+			console.log(1)
+		})
+		
+	}
+
+
+	</script>
+</head>
+<body>
+<div id="box"></div>
+<a href="#">aaaa1</a>
+	
+</body>
+</html>
