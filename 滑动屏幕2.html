@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<script src = 'js/hammer.js'></script>
+<style>
+	html{margin: 0px;}
+	body{margin: 0px;}
+	.div1{
+		height: 100%;
+		width:100%;
+		padding: 0px;
+		margin: 0px;
+		overflow: hidden;
+	}
+	ul{list-style: none; padding: 0px; margin: 0px; width: 400%;height: 100%; transition: all 1s }
+	li{width: 25%;height:600px; float: left; }
+	
+	li:nth-of-type(1) {
+		background: red;
+	}
+	li:nth-of-type(2) {
+	background: orange;
+	}
+	li:nth-of-type(3) {
+		background: black;
+	}
+	li:nth-of-type(4) {
+	background: gray;
+	}
+	</style>
+</head>
+<body>
+<div class="div1" id="div1">
+	<ul>
+		<li>第一张页面</li>
+		<li>第二张页面</li>
+		<li>第三张页面</li>
+		<li>第四张页面</li>
+	</ul>
+</div>
+	<script>
+		var oDiv = document.getElementById('div1');
+		var uls1  = div1.getElementsByTagName('uls')[0];
+		var lis = div1.getElementsByTagName('li');
+	window.onload = function()
+	{
+		
+		function getStyle(obj,attr){
+			return getComputedStyle(obj,null)[attr];
+		}
+			
+
+
+			var w=parseInt(getStyle(lis[0],'width'));
+			//console.log(w)				
+				uls1.addEventListener("touchstart",function(ev){
+					
+					ev.preventDefault();
+					
+					var ex = ev.changedTouches[0].pageX;
+					
+					var oLeft = uls.offsetLeft;
+					
+					uls1.addEventListener('touchmove',function(ev){
+						
+						var dis = ev.changedTouches[0].pageX-ex;
+						
+						uls1.style.left = (oLeft+dis)+'px';
+					})
+
+					uls1.addEventListener('touchend',function(){
+						var n=Math.round(uls1.offsetLeft/w);
+						
+						if(-n==lis.length){
+							n=1-lis.length;
+						}
+						
+						if(n>0){
+							n=0;
+						}
+						uls1.style.left =n*w+'px';
+					})
+				})
+	}
+
+
+	</script>
+	
+</body>
+</html>

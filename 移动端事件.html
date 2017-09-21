@@ -58,6 +58,21 @@
 		haha.on('tap',function(){
 			console.log(1)
 		})
+		var sc=1;
+		haha.on('pinchin',function(){
+			sc+=0.03;
+			if(sc>0.3){
+				sc=0.3
+			}
+			document.oDiv.style.webkitTransform='scale('+sc+')';
+		})
+		haha.on('pinchin',function(){
+		sc-=0.03;
+		if(sc<0.3){
+			sc=0.3
+		}
+		document.oDiv.style.webkitTransform='scale('+sc+')';
+		})
 		
 	}
 
