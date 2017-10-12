@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+			<script src="js/vue.js"></script>
+			
+
+			<style>
+				.red{
+					color:red;
+				}
+			</style>
+	</head>
+	<body>
+		<div id="app">
+			{{info}}
+			 <ul>
+			 	<li v-for="x in list">{{x}}</li>
+			 </ul>
+		</div>
+
+		<script>
+			var vm=new Vue({
+				el:'#app',
+				//template:'<div><p>显示的信息:{{info}}</p><p>two</p></div>',  //根元素唯一
+				data:{
+					info:'世界,你好abc111！',
+					list:[]
+					
+					
+				}
+				
+				
+			})
+			//MVVM框架   M Model 模型  V view  template
+			
+			vm.info="javascript jq2";
+			
+			// M 数据变化了，view 插值表达式的变量跟着变化，不用dom操作
+			
+			//jq dom 事件驱动方式
+			//vue 数据驱动方式  虚拟dom 
+		</script>
+	</body>
+</html>

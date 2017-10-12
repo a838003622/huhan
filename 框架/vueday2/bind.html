@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	   <style>
+	   	 /*[v-cloak]{
+	   	 	display: none;
+	   	 }*/
+	   	p{
+	   		width:300px;
+	   		height: 60px;
+	   		border: 1px solid #000;
+	   	}
+	   </style>
+	</head>
+	<body>
+		<div class="box">{{a}}
+	    <input type="text" v-model.trim="a" />
+	    <input type="text" v-model="b" />
+	    <input type="text" v-model.lazy="c" />{{c}}
+	    <p @click="def">
+	    	 <button @click.stop="abc"></button> 	
+	    </p>
+	   
+	 <!--   {{a+b}}-->
+	    {{"abc"+a+"def"}}
+		</div>
+		<script>
+			// v-html 会绑定变量里的html标记
+			//v-text 只会绑定文本
+			new Vue({
+				el:'.box',
+				data:{
+					a:0,
+					b:0,
+					c:''
+				},
+				methods:{
+					abc(){
+						 alert("abc fun");
+					},
+					def(){
+						alert("def fun");
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

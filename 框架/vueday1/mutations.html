@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src ='js/vue.js'></script>
+	<script src ='js/vuex.js'></script>
+	<style>
+	*{list-style: none;}
+	</style>
+</head>
+<body>
+	<div id="app">
+      	<inp></inp>
+      	<lis></lis>
+	</div>
+	<script>
+	const store = new Vuex.Store({
+		  state: {
+		  	list:['aaa','bbb','ccc','ddd','eee'],
+		  	text:''
+		},
+		  mutations: {
+		    aa:function (state,uvalue) {
+
+		      state.text = uvalue.toUpperCase()
+		      // state.text = ''
+		    },
+		    bb:function (state){
+		    	state.text = ''
+		    }
+		}
+	})
+	var inp = {
+		template:`<input :value='aabb' @mouseover='show1'/>`,
+		computed:{
+			aabb(){
+				return store.state.text;
+			}
+		},
+		methods:{
+			show1(){
+				store.commit('bb')
+			}
+		}
+	}
+	var lis = {
+		template:`<ul><li v-for="x in clist" @click ='show(x)'>{{x}}</li></ul>`,
+		computed:{
+             clist(){
+             	return store.state.list;
+             }
+		},
+		methods:{
+			show(x){
+				store.commit('aa',x)
+			}
+		}
+
+
+	}
+	new Vue({
+		components:{inp,lis},
+		el:'#app',
+
+	})
+
+	</script>
+</body>
+</html>

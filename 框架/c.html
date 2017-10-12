@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="js/vuex.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{abc}}  <button @click="handle">按钮</button>
+		</div>
+		<script>
+			const store = new Vuex.Store({
+				  state: {
+				    count: 0
+				  },
+				  mutations: {
+				      jjjjjj(state,v) {
+				      state.count+=v
+				    }
+				  }
+			})
+			console.log(store)
+			var vm=new Vue({
+				el:"#app",
+			    computed:{
+			    	 abc(){
+			    	 	return store.state.count;
+			    	 }
+			    },
+			    methods:{
+			    	 handle(){
+			    	 	  store.commit("jjjjjj",9)
+			    	 }
+			    }
+			})
+		</script>
+	</body>
+</html>

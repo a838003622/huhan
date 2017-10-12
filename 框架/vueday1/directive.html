@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	   <style>
+	   	  .page li{
+	   	  	  list-style: none;
+	   	  	  float: left;
+	   	  	  width:60px;
+	   	  	  height: 25px;
+	   	  	  line-height: 25px;
+	   	  }
+	   	  .page .highcolor{
+	   	  	 background: blue;
+	   	  	 color:white;
+	   	  }
+	   	  .a{
+	   	  	color:red;
+	   	  	
+	   	  }
+	   	  
+	   	  .b{
+	   	  	font-size:50px;
+	   	  	transition: all 300ms;
+	   	  }
+	   </style>
+	</head>
+	<body>
+		<div class="box">
+			<p>选中你掌握的技能</p>
+			<input type="checkbox" v-model="list" value="js" />js
+			<input type="checkbox" v-model="list" value="jq" />jq
+			
+			<!--<input type="radio" v-model="list" name="sex" value="male" />男
+			<input type="radio" v-model="list" name="sex" value="female" />女-->
+			
+			<div v-if="typeof list=='string'">{{list}}</div>
+			<div v-else>
+				<ul>
+				   
+					<li v-for="item in list">{{item}}</li>
+				</ul>
+			</div>
+			<hr  />
+			<ul class="page">
+				<li v-for="n in 10"><span :class="['a',{'b':cur===n}]" @click="go(n)">{{n}}</span></li>
+			</ul>
+		</div>
+		<script>
+			// :class 动态绑定class   值是对象 ,键是css类,值是表达式,当表达式值为真，使用这个类
+			
+		     new Vue({
+		     	el:".box",
+		     	data:{
+		     		list:[],
+		     		lx:'checkbox',
+		     		cur:5   //当前页
+		     	},
+		     	methods:{
+		     		go(page){
+		     			this.cur=page; //指定当前页码
+		     		}
+		     	}
+		     	
+		     	
+		     })
+		</script>
+	</body>
+</html>

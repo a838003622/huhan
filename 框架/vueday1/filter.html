@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		
+	    <div id="app">
+	    	 <input type="text" v-model="keyword" />
+	    	<ul>
+	    		<li v-for="item in myList">{{item.mz|camel}} {{item.rq|dateFormat}}</li>
+	    	</ul>
+	    	
+	    </div>
+	    <script>
+//	    	alert( "hello world".replace(/l(o)/g,function(){
+//	    		console.log(arguments);
+//	    		 return "sun";
+//	    	}));
+	    	//自定义过滤器
+	    	  // "hello-world-java   helloWorldJava"
+	    	  function  camel(str){
+	    	  	return str.replace(/-(\w)/g,function(){  //arguments[1] 形参的第二个   （）分组
+	    	  		return arguments[1].toUpperCase();
+	    	  	})
+	    	  }
+	    	
+	    	  Vue.filter("uppercase",function(value){
+	    	  	  return value.toUpperCase();
+	    	  	  
+	    	  })
+	    	  Vue.filter("camel",function(value){
+	    	  	 return value.replace(/-(\w)/g,function(a,b){
+	    	  		return b.toUpperCase();
+	    	  	})
+	    	  })
+	    	  new Vue({
+	    	  	el:"#app",
+	    	    computed:{  //计算属性
+	    	    	 str:function(){
+	    	    	 	return this.keyword.split('').reverse().join('');
+	    	    	 },
+	    	    	 upp(){
+	    	    	 	return this.keyword.toUpperCase();
+	    	    	 },
+	    	    	 myList(){
+	    	    	 	  return this.list.filter((item)=>{
+	    	    	 	   		return item.mz.indexOf(this.keyword)!=-1;
+	    	    	 	   })
+	    	    	 }
+	    	    },
+	    	    filters:{
+	    	    	 dateFormat:function(value){
+	    	    	 	return value.getFullYear()+"年"+value.getMonth()+"月"+value.getDate();
+	    	    	 }
+	    	    },
+	    	  	
+	    	  	data:{
+	    	  		list:[{"mz":"aa-java","rq":new Date()},{"mz":"bb-jquery","rq":new Date()},{"mz":"cc-boot-strap","rq":new Date()}],
+	    	  		keyword:''
+	    	  		
+	    	  	}
+//	    	  	updated(){
+//	    	  		return this.str=this.keyword.split('').reverse().join('')
+//	    	  	}
+	    	  })
+//	    	  console.log([1,2,3,4,5].filter((d)=>{
+//	    	  	return d>3;
+//	    	  }));
+	    </script>
+	</body>
+</html>

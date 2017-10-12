@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	   <style>
+	   	.demo{
+	   		background: #ccc;
+	   	}
+	   </style>
+	</head>
+	<body>
+		
+		<div class="box">
+		     <input type="checkbox"  v-model="flag" />
+		     <div v-show="flag">
+		     	内容
+		     </div>
+		     <div v-if="flag">
+		     	内容
+		     </div>
+		     <input type="text" v-model="w" />
+		     <input type="text" v-model="h" />
+		     <div class="demo" :style='{width:w+"px",height:h+"px"}'>
+		     </div>
+		     	
+		     </div>
+		</div>
+		<script>
+			
+			//v-if 不频繁改变  v-show 不适合加载大
+		     new Vue({
+		     	el:".box",
+		     	data:{
+		     		flag:true,
+		     		w:100,
+		     		h:200
+		     		
+		     	}
+		     	
+		     })
+		    
+		</script>
+	</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<script src = 'js/vue.js'></script>
+	<title>Document</title>
+<style>
+	.box{
+		width: 500px;
+		height:400px;
+		border:1px solid red;
+		margin: 100px auto;
+	}
+</style>
+</head>
+<body>
+	<div id="box">
+		<input type="range" min=0 max=255 v-model='re'>
+		<input type="range" min=0 max=255  v-model='ge'>
+		<input type="range" min=0 max=255  v-model='be'>
+		<div class="box" :style="{background:cddd}"></div>
+	</div>	
+	<script>
+		new Vue({
+			el:'#box',
+			data:{
+				re:150,
+				ge:220,
+				be:0,
+				cddd:'white'
+			},
+			updated(){
+				this.cddd ="rgb("+this.re+","+this.ge+","+this.be+")"
+			}
+		})
+
+	</script>
+</body>
+</html>

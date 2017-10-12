@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="js/vue.js"></script>
+	<style>
+		*{padding: 0px; margin:0px;}
+	</style>
+</head>
+<body>
+	<div id='app'>
+		<ul>
+			<li v-for="n in mylist">{{n.name}}{{n.date1}}</li>
+		</ul>
+	</div>
+	<script>
+		new Vue({
+			el:'#app',
+			data:{
+				list:[{'name':'胡晗','date1':new Date()},{'name':'张三','date1':new Date()},{'name':'李四','date1':new Date()}]
+			},
+			computed:{
+				mylist(){
+                    return this.list.filter(function(item){
+                    	document.write(item.name+":")
+                    	document.write(item.date1.getFullYear()+"年"+"-");
+                    	document.write(item.date1.getMonth()+1+"月"+"-");
+                    	document.write(item.date1.getDate()+"日"+"!"+"<br>")
+                    })
+				}
+			}
+		})
+
+	</script>
+</body>
+</html>

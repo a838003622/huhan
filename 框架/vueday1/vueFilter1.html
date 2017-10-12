@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='js/vue.js'></script>
+	<style>
+	*{
+		padding: 0px;
+		margin: 0px;
+		list-style: none;
+	}
+	.ys{
+		background-color: red;
+		width: 100px;
+	}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model="keyword" @keyup="aj">
+		<ul v-show="flag">
+			<li v-for ="my in mylist" :class="{'ys':my.name==curmz}" v-on:click="dj(my)" v-on:mouseover="fg(my)" v-on:mouseout="fj(my)">{{my.name}}</li>
+		</ul>
+		<div>
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		var listapp={
+			template:`<div>
+						<ul>
+							<li></li>
+						</ul>
+					</div>`
+		}	
+		watch:{
+				console.log(listapp);
+			}
+
+		new Vue({
+			compneents:"listapp",
+			el:"#app",
+			data:{
+				list:
+				[
+					{"name":"huhan"},
+					{"name":"zhangsan"},
+					{"name":"lisi"},
+					{"name":"zhaowu"},
+					{"name":"wgfdgdf"},
+					{"name":"jhgjg"},
+					{"name":"liba"},
+					{"name":"wangliu"},
+					{"name":"yangqi"},
+					{"name":"fddfs"},
+					{"name":"wfdsfsiu"},
+					{"name":"ygddfgqi"},
+					{"name":"hfghfa"},
+					{"name":"whgfhgfliu"},
+					{"name":"yhgfhfgqi"},
+					{"name":"lfghfgha"},
+				],
+				keyword:"",
+				flag:true,
+				curmz:''
+			},
+
+			computed:{
+				mylist(){
+					
+					var that=this;
+					if(this.keyword=="") {return []};
+					return this.list.filter(function(item){
+
+						return item.name.indexOf(that.keyword)!=-1;
+					})
+				}
+			},
+			methods:{
+				aj(){
+						this.flag=true;
+				},
+				dj(item){
+					this.keyword=item.name;
+					this.flag=false;
+
+				},
+				fg(item){
+					this.curmz = item.name
+				},
+				fj(my){
+					this.curmz = "";
+				}
+				
+
+			}
+		})
+	</script>
+</body>
+</html>

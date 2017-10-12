@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div class="box">
+		    <select v-model="zy">
+		    	<option v-for="(item,key) in pro">{{key}}</option>
+		    </select>
+		    <select>
+		    	<option  v-for="item in lessons">{{item}}</option>
+		    </select>
+			
+		</div>
+		<script>
+			var vm=new Vue({
+				el:".box",
+				data:{
+					pro:{"qd":{'one':'js','two':'jq','three':'css3'},"ui":{"one":"ps","two":"图标设计"}},
+					lessons:[],
+					zy:''
+				},
+				created(){
+					 this.zy='qd'
+				},
+				watch:{
+					//监控的值 data里一定要存在
+					zy:function(n){
+						this.lessons=this.pro[n];
+					}
+				}
+				
+			})
+			
+		</script>
+	</body>
+</html>

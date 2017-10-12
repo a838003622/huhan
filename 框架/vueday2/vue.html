@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='js/vue.js'></script>
+</head>
+<body>
+<!-- 	<div id='app'>
+		{{name}}
+	</div>
+	<script>
+	var vm =new Vue({
+		el:'#app',
+		// template:'<div><h1>{{name}}</h1></div>',
+		data:{
+			name:1000+1000
+		}
+	})
+	 vm.name='hahahhahahahaha'
+	</script> -->
+	<div id='app'>
+		<input type="text" v-model='a'>
+		<input type="text" v-model='b'>
+
+		<button v-on:click='swap'>和差积商</button>
+		<ul>
+			<li v-for='r in results'>{{r}}</li>
+		</ul>
+	</div>
+	<script>
+	new Vue({
+		el:'#app',
+		data:{
+			a:0,
+			b:0,
+			results:[]
+		},
+		methods:{
+			swap(){
+				this.results[0] =parseFloat(this.a)+parseFloat(this.b);
+				this.results[1] =parseFloat(this.a)-parseFloat(this.b);
+				this.results[2] =parseFloat(this.a)*parseFloat(this.b);
+				this.results[3] =parseFloat(this.a)/parseFloat(this.b);
+			}
+		}
+	})
+	</script>
+</body>
+</html>

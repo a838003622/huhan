@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='js/vue.js'></script>
+</head>
+<body>
+	<div id='app'>
+		<ul>
+			<li v-for="huhan in mylist">{{huhan.name|Hu}}{{huhan.rq}}{{str}}</li>
+		</ul>
+		<ul>
+			<li v-for="huhan in list">{{huhan.name|Hu1}}{{huhan.rq}}{{str}}</li>
+		</ul>
+	</div>
+	<script>
+		function Hu(){
+		return str.replace(/-(\w)/g,function(){
+			return arguments[1].toUpperCase();
+		})
+		}
+
+		function Hu1(){
+		return str.replace(/-(\w)/g,function(){
+			return arguments[1].toUpperCase();
+		})
+		}
+		
+		Vue.filter("Hu",function(value){
+			return value.toUpperCase()
+		})
+
+		Vue.filter("Hu",function(value){
+			return value.replace(/-(\w)/g,function(a,b){
+				return b.toUpperCase();
+			})
+		})
+		Vue.filter("Hu1",function(value){
+			return value.toUpperCase()
+		})
+
+
+		var n1=new Vue({
+			el:'#app',
+			data:{
+				list:[{"name":"aa-cba","rq":new Date()},{"name":"bb-nba","rq":new Date()},{"name":"cc-cba","rq":new Date()}]
+			},
+			computed:{
+				mylist(){
+					this.list.value.getFullYear()
+				}
+			}
+		})
+
+
+	</script>
+</body>
+</html>

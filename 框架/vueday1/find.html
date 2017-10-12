@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<style>
+			.cur{
+				background:#ccc;
+				width:100px;
+			}
+		</style>
+	</head>
+	<body>
+	    <div id="app">
+	        <my-input @datainput="input" @change="change" :pdata="keyword" :state="suc"></my-input>  <!-- 4)父组件监听子组件的自定义事件 datainput-->
+	    	<my-list :pflag="flag" :list="myList" @selected="handle"></my-list>
+	    </div>
+	    <script>
+	    	var myList={
+	    		template:`<div><ul v-show="pflag" @mouseleave="mout">
+	    						<li v-for="item in list" @click="handle(item)" @mouseenter="mover(item)" :class="{'cur':item.mz==curmz}">{{item.mz}} </li>
+	    					</ul></div>`,
+	    		props:['pflag',"list"],
+	    		data(){
+	    			return{
+	    				 curmz:''
+	    			}
+	    		},
+	    		methods:{
+	    			mover(item){
+              	 		this.curmz=item.mz;
+              	 	},
+              	 	mout(){
+              	 		this.curmz=""
+              	 	},
+              	 	handle(item){
+              	 		this.$emit("selected",item);
+              	 		this.curmz="";
+              	 	}
+	    		}
+	    	}
+	    	var myInput={   //定义了一个子组件    数据是单向流动的
+	    		template:`<div><input type="text" v-model="msg" @keyup="input" /></div>`,  //2） 子组件 keyup事件
+	    		props:["pdata","state"],
+	    		data(){
+	    			return {
+	    				msg:this.pdata
+	    			}
+	    		},
+	    		watch:{
+	    			state:function(n){	    				
+	    				 if(n){  //用户按鼠标确认了
+	    				 	this.msg=this.pdata;
+	    				 	this.$emit("change",false);
+	    				 }
+	    			}
+	    		},
+	    		methods:{
+	    			input(){
+	    				this.$emit("datainput",this.msg)  //3） 向父组件发送文本框里的数据
+	    			}
+	    			
+	    		}
+	    	}
+              new Vue({
+              	components:{myInput,myList},
+              	 el:"#app",
+              	 data:{
+              	 	list:[{"mz":"aaa","rq":new Date()},{"mz":"abc","rq":new Date()},{"mz":"cde","rq":new Date()},{"mz":"cva","rq":new Date()}],
+              	 	keyword:'',    //1）keyword 由父组件传给子组件
+              	 	flag:false,
+              	 	
+              	 	suc:false    //判断用户是否按下了鼠标  false 为按鼠标确认  true 按下了鼠标确认选择
+              	 },
+              	 computed:{
+              	 	 myList(){
+              	 	 	if(this.keyword=="") return [];
+              	 	 	return   this.list.filter((item)=>{
+              	 	 	  	  return item.mz.indexOf(this.keyword)!=-1;
+              	 	 	  })
+              	 	 }
+              	 },
+              	 methods:{
+              	 	change(n){
+              	 		this.suc=n;
+              	 	},
+              	 	input(num){   //5）拿到子组件传过来的值
+              	 		this.flag=true;
+              	 		this.keyword=num;
+              	 	},
+              	 	handle(item){
+              	 		this.suc=true;
+              	 		this.keyword=item.mz;
+              	 		this.flag=false;
+              	 	}
+              	 	
+              	 }
+              })
+	    </script>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div class="box">
+			<input type="text" v-model="a" @keyup.enter="add" />
+			<ul>
+				<li v-for="item in list">{{item}}</li>
+			</ul>
+			<my-header v="首个"></my-header>
+			<my-header v="first"></my-header>
+			<my-header v="第一个"></my-header>
+			<my-header v="top"></my-header>
+			<my-header v="顶部"></my-header>
+			<my-com></my-com>
+		</div>
+		<hr  />
+		<div class="box2">
+			<my-header></my-header>
+				<my-com></my-com>
+		</div>
+		<script>
+//			Vue.config.keyCodes = {
+//
+//f2: 113,
+// 
+//}    
+            Vue.component("myHeader",{         //全局注册  可以用于多个实例
+            	props:["v"],
+            	template:"<div>我的{{v}}元素</div>"
+            })
+            var myCom={
+            	template:"<p>局部注册的组件</p>"
+            }
+			//keyup 按键到弹起只响应一次
+			var vm=new Vue({
+				components:{   //局部注册的组件在哪个实例里注册就只能在那个实例里使用
+					myCom:myCom
+				},
+				el:'.box',
+				data:{
+					list:[],
+					a:''
+				},
+				methods:{
+					add(){
+						this.list.push(this.a);
+						this.a='';
+					}
+				}
+				
+			})
+			new Vue({
+				el:".box2"
+			})
+		</script>
+	</body>
+</html>

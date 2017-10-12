@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+		<script src="js/vuex.js"></script>
+		<script src="js/vue-resource.js"></script>
+		
+	</head>
+	<body>
+		<div id="app" @mouseleave="hide">
+			  <wbk></wbk>
+			  <list></list>
+		</div>
+		<script>
+			const store = new Vuex.Store({
+				  state: {
+				    title:'',
+				    list:["aa","bb","cc","dd"],
+				    visible:false,
+				 
+				  },
+				  mutations: {
+				     change:function(state,obj){
+				     	console.log(obj);
+				     	 state.title=obj.value;
+				     	 state.visible=false;
+				     },
+				     showhide:function(state,v){
+				     	 state.visible=v;
+				     },
+				     getData:function(state,data){
+				     	state.list=data;
+				     }
+				  },
+				  actions:{
+				  	   getDataBaidu:function(context){
+				  	   	 
+				Vue.http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=',{jsonp:'cb'}).then(function(res){context.commit("getData",res.data.s)},function(){});}}})
+						var wbk=
+						{
+							template:`<input type='text' :value='wb' @focus='show'  />`,
+							computed:
+							{
+								wb()
+								{
+									return store.state.title;
+								}
+							},
+							methods:
+							{
+								 show()
+								 {
+								 	  store.commit("showhide",true);
+								 }
+							}
+						}
+			var list={
+				template:`<ul v-show='vis'><li v-for='(item,key) in list' @click="ok(item)">{{item}}</li></ul>`,
+				computed:{
+					 list(){
+					 	return store.state.list;
+					 },
+					 vis(){
+					 	return store.state.visible;
+					 }
+				},
+				methods:{
+					  ok(value){					  	
+					  	 store.commit("change",{value});
+					  }
+					  
+				}
+			}
+			var vm=new Vue({
+				components:{list,wbk},
+				el:"#app",
+				created(){
+					store.dispatch("getDataBaidu");
+				},
+				
+				methods:{
+					
+					hide(){
+						store.commit("showhide",false);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

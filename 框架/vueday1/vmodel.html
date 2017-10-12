@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+			
+		
+	</head>
+	<body>
+		<div id="app">
+				<input type="text" v-model="a" />
+				<input type="text" v-model="b" />
+				<button v-on:click="swap">交换</button>  <!-- v-指令 -->
+				<p>{{parseFloat(a)+parseFloat(b)}}</p>
+				<p>{{a-b}}</p>
+				<p>{{a*b}}</p>
+				<p>{{a/b}}</p>
+		</div>
+		<script>
+			new Vue({
+				el:'#app',
+				data:{
+					a:5,
+					b:8
+					
+				},
+				methods:{
+					swap(){
+//						var c;
+//						c=this.a;
+//						this.a=this.b;
+//						this.b=c;
+                       [this.a,this.b]=[this.b,this.a];
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>

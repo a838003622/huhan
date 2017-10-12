@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+			
+		
+	</head>
+	<body>
+		<div id="app">
+				<input type="text" v-model="a" />
+				<input type="text" v-model="b" />
+				<button @click="cal">计算</button>  <!-- v-指令 -->
+				<ul>
+					<li v-for="r in results">{{r}}</li>
+				</ul>
+				
+		</div>
+		<script>
+			var vm=new Vue({
+				el:'#app',
+				data:{
+					a:5,
+					b:8,
+					results:[]
+					
+				},
+				methods:{
+					cal(){
+                        this.results=[0,0,0,0];
+                        this.results[0]=parseFloat(this.a)+parseFloat(this.b);
+                        this.results[1]=this.a-this.b;
+                        this.results[2]=this.a*this.b;
+                        this.results[3]=this.a/this.b;
+                        
+                      
+					}
+				}
+				
+			})
+		</script>
+	</body>
+</html>
